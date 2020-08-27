@@ -31,7 +31,7 @@
 #include "random.h"
 #include <stdint.h>
 
-// namespace daisysp
+
 // {
 /*---------------------------------------------------------------------------------*/
 class Drifter

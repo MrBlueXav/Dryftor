@@ -1,30 +1,56 @@
 # Description
 Synthesizer for Electro-smith Daisy pod.
 
-Dryftor is a simple drone machine with 5 drifting polyblep saw oscillators and delay/phaser/chorus FX.
+**Dryftor** is a simple drone machine with 8 drifting polyblep saw oscillators and delay/phaser/chorus FX.
 
 Imagine a siren in a beehive !
 
-Switch 1 toggles manual and automatic modes.
+-----------------------
 
-Switch2 is for mute.
+Pod controls assignments depend of the mode you choose in rotating the encoder.
 
-Knob1 controls main frequency in manual mode only.
+Knobs positions are stored to prevent brutal value jumps when changing mode.
 
-Knob2 controls the amount of drift of the 5 oscillators.
+In mode "white" (leds are white):
 
-Encoder controls effects in looped sequence :
+* Switch1 toggles manual and automatic modes.
 
-    NOFX,
+* Switch2 is for mute.
 
-    DELAYonly,
+* Knob1 controls main frequency in manual mode only.
 
-    DELAYandPHASER,
+* Knob2 controls the amount of drift of the oscillators.
 
-    DELAYandPHASERandCHORUS,
+In mode "blue" :
 
-    DELAYandCHORUS
-    
+* Switch1 toggles delay FX on/off.
+
+* Switch2 :
+
+* Knob1 controls main frequency in manual mode only.
+
+* Knob2 controls the amount of drift of the oscillators.
+
+In mode "red" :
+
+* Switch1 : phaser on/off
+
+* Switch2 :
+
+* Knob1 :
+
+* Knob2 :
+
+In mode "green" :
+
+* Switch1 : chorus on/off
+
+* Switch2 :
+
+* Knob1 :
+
+* Knob2 :
+
 
 
 

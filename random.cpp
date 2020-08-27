@@ -19,9 +19,9 @@ RNG_HandleTypeDef RngHandle;
 
 void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
 {
-  /* RNG Peripheral clock enable */
-  __RNG_CLK_ENABLE();
-  __HAL_RNG_ENABLE(&RngHandle);
+    /* RNG Peripheral clock enable */
+    __RNG_CLK_ENABLE();
+    __HAL_RNG_ENABLE(&RngHandle);
 }
 //-------------------------------------------------------------------------------------------------------
 
@@ -34,28 +34,29 @@ void HAL_RNG_MspInit(RNG_HandleTypeDef *hrng)
   */
 void HAL_RNG_MspDeInit(RNG_HandleTypeDef *hrng)
 {
-  /* Enable RNG reset state */
-  __RNG_FORCE_RESET();
+    /* Enable RNG reset state */
+    __RNG_FORCE_RESET();
 
-  /* Release RNG from reset state */
-  __RNG_RELEASE_RESET();
+    /* Release RNG from reset state */
+    __RNG_RELEASE_RESET();
 }
 
 //---------------------------------------------------------------------------
 void randomGen_init(void)
 {
-	/* Configure the RNG peripheral #######################################*/
+    /* Configure the RNG peripheral #######################################*/
 
-	  RngHandle.Instance = RNG;
+    RngHandle.Instance = RNG;
     uint32_t random32bit;
 
-	  if(HAL_RNG_Init(&RngHandle) != HAL_OK)
-	  {
-	    /* Initialization Error */
-	    //Error_Handler();
-	  }
+    if(HAL_RNG_Init(&RngHandle) != HAL_OK)
+    {
+        /* Initialization Error */
+        //Error_Handler();
+    }
     HAL_RNG_GenerateRandomNumber(&RngHandle, &random32bit);
-	srand(random32bit);
+
+    srand(random32bit);
 }
 //---------------------------------------------------------------------------
 /**************
@@ -63,7 +64,13 @@ void randomGen_init(void)
  *****************/
 float_t frand_a_b(float_t a, float_t b)
 {
-	return ( rand()/(float_t)RAND_MAX ) * (b-a) + a ;
+    //return (rand() / (float_t)RAND_MAX) * (b - a) + a;
+    uint32_t random32bit;
+    float r;
+    HAL_RNG_GenerateRandomNumber(&RngHandle, &random32bit);
+    r = float(random32bit) / float(0xFFFFFFFF) * (b - a) + a;
+
+    return r;
 }
 
 
@@ -73,13 +80,13 @@ float_t frand_a_b(float_t a, float_t b)
  *****************/
 float_t randomNum(void)
 {
-	float_t random = 1.0f;
-  uint32_t random32bit;
+    float_t  random = 1.0f;
+    uint32_t random32bit;
 
-  HAL_RNG_GenerateRandomNumber(&RngHandle, &random32bit);
+    HAL_RNG_GenerateRandomNumber(&RngHandle, &random32bit);
 
-	random = (float_t) (random32bit / 4294967294.0f);
-	return random;
+    random = (float_t)(random32bit / 0xFFFFFFFF);
+    return random;
 }
 
 /*-----------------------------------------------------------------------------*/
@@ -88,7 +95,7 @@ float_t randomNum(void)
  *****************/
 uint8_t MIDIrandVal(void)
 {
-	return (uint8_t)lrintf(frand_a_b(0 , MIDI_MAX));
+    return (uint8_t)lrintf(frand_a_b(0, MIDI_MAX));
 }
 
 //-------------------------------------------------------------------------------------------------------

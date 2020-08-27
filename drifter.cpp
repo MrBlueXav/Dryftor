@@ -35,28 +35,11 @@ void Drifter::SetMinFreq(float freq)
 {
     fmin_ = freq;
 }
-
-// void Drifter_minFreq_set(uint8_t val) {
-// 	d1.fmin = d2.fmin = d3.fmin = d4.fmin = d5.fmin = .1f + 50 * val / MIDI_MAX;
-
-// }
 /*-------------------------------------------------------------------------------------------*/
 void Drifter::SetMaxFreq(float freq)
 {
     fmax_ = freq;
 }
-
-/* void Drifter_maxFreq_set(uint8_t val) {
-	float x;
-
-	x = (1 + 19 * val / MIDI_MAX) * d1.fmin;
-	if (x > 10000)
-		d1.fmax = d2.fmax = d3.fmax = 10000;
-	else {
-		d1.fmax = d2.fmax = d3.fmax = x;
-	}
-} */
-
 /*-------------------------------------------------------------------------------------------*/
 void Drifter::NewSegment() //
 {
@@ -82,11 +65,12 @@ float Drifter::NextSample() //
 /*-------------------------------------------------------------------------------------------*/
 void Drifter::Init(float sample_rate)
 {
-    sr_    = sample_rate;
-    final_ = 0;
-    fmax_  = 4;
-    fmin_  = 2;
-    gain_  = .01f;
+    sr_     = sample_rate;
+    final_  = 0;
+    float r = frand_a_b(0, 1);
+    fmax_   = 4 * r + 0.1;
+    fmin_   = 2 * r + 0.1;
+    gain_   = .01f;
 
     NewSegment();
 }

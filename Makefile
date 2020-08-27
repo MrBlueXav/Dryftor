@@ -9,7 +9,8 @@ delay.cpp \
 drifter.cpp \
 phaser.cpp \
 random.cpp \
-sinetable.cpp
+sinetable.cpp \
+podController.cpp
 
 # Library Locations
 LIBDAISY_DIR = ../../libdaisy
