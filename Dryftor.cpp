@@ -2,7 +2,7 @@
 //
 //        Dryftor for Daisy pod platform
 //        by Xavier Halgand
-//			august 2020
+//			february 2022
 //
 //*************************************************************************************
 #include "Dryftor.h"

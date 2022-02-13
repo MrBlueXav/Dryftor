@@ -3,7 +3,7 @@
 //    podController.cpp
 //    Pod controller : state machine to manage buttons, knobs and encoder through modes
 //      by Xavier Halgand
-//			august 2020
+//			february 2022
 //
 //****************************************************************************
 
