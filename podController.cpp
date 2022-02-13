@@ -1,7 +1,7 @@
 //----------------------------------------------------------------------------
 //
 //    podController.cpp
-//    Pod controller : state machine to manage buttons, knobs and encoder
+//    Pod controller : state machine to manage buttons, knobs and encoder through modes
 //      by Xavier Halgand
 //			august 2020
 //
@@ -9,7 +9,7 @@
 
 #include "podController.h"
 
-using namespace std;
+//--------------------------------------------------------------------------------
 
 void PodController::Init()
 {
@@ -24,17 +24,15 @@ void PodController::Init()
     oldk1val = k1val;
     oldk2val = k2val;
 }
-
+//-------------------------------------------------------------------------------
 void PodController::NextState()
 {
     if(state < STATE_END - 1)
         state = ControllerState(state + 1);
-
-    //if(state == STATE_END)
     else
         state = STATE1;
 }
-
+//-------------------------------------------------------------------------------
 void PodController::PrevState()
 {
     if(state == STATE1)
@@ -45,19 +43,20 @@ void PodController::PrevState()
     else
         state = ControllerState(state - 1);
 }
-
- bool PodController::stateHasChanged()
- {
-     return (state != oldstate);
- }
+//-------------------------------------------------------------------------------
+bool PodController::stateHasChanged()
+{
+    return (state != oldstate);
+}
+//-------------------------------------------------------------------------------
 
 /* ----  Call this function in AudioCallback(float *in, float *out, size_t size) -----*/
 void PodController::Process()
 {
     int32_t incr;
 
-    pod.UpdateAnalogControls();
-    pod.DebounceControls();
+    pod.ProcessAnalogControls();
+    pod.ProcessDigitalControls();
 
     /* --------- Read encoder ----------*/
     incr = pod.encoder.Increment();
@@ -65,12 +64,10 @@ void PodController::Process()
     if(incr > 0)
     {
         NextState();
-        //EncoderIncr(state);
     }
     if(incr < 0)
     {
         PrevState();
-        //EncoderDecr(state);
     }
 
     /*---------- Read knobs ------------*/
@@ -115,6 +112,18 @@ void PodController::Process()
         {
             c1.Init(daisy::Color::PresetColor::GREEN);
             c2.Init(daisy::Color::PresetColor::GREEN);
+            break;
+        }
+         case STATE5:
+        {
+            c1.Init(daisy::Color::PresetColor::CYAN);
+            c2.Init(daisy::Color::PresetColor::CYAN);
+            break;
+        }
+         case STATE6:
+        {
+            c1.Init(daisy::Color::PresetColor::PURPLE);
+            c2.Init(daisy::Color::PresetColor::PURPLE);
             break;
         }
         default: break;

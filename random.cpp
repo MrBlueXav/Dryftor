@@ -64,13 +64,7 @@ void randomGen_init(void)
  *****************/
 float_t frand_a_b(float_t a, float_t b)
 {
-    //return (rand() / (float_t)RAND_MAX) * (b - a) + a;
-    uint32_t random32bit;
-    float r;
-    HAL_RNG_GenerateRandomNumber(&RngHandle, &random32bit);
-    r = float(random32bit) / float(0xFFFFFFFF) * (b - a) + a;
-
-    return r;
+    return (rand() / (float_t)RAND_MAX) * (b - a) + a;    
 }
 
 

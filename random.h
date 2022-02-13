@@ -10,12 +10,14 @@
 #define __RANDOM_H__
 
 /* Includes ------------------------------------------------------------------*/
-#include "random.h"
+//#include "random.h"
 #include "constants.h"
+#include "daisysp.h"
+#include "daisy_pod.h"
 #include  <stdint.h>
 #include <math.h>
 #include <stdlib.h>
-#include "stm32h7xx_hal.h"
+//#include "stm32h7xx_hal.h"
 
 
 /*-Exported functions---------------------------------------------------------*/

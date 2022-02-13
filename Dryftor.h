@@ -8,8 +8,8 @@
 #ifndef DRYFTOR_H
 #define DRYFTOR_H
 
-#include "daisysp.h"
-#include "daisy_pod.h"
+//#include "daisysp.h"
+//#include "daisy_pod.h"
 
 #include <math.h>
 #include <stdint.h>

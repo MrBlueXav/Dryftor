@@ -21,6 +21,8 @@ enum ControllerState : int
     STATE2,
     STATE3,
     STATE4,
+    STATE5,
+    STATE6,
     STATE_END // Don't change that virtual end state name !
 };
 

@@ -6,7 +6,8 @@
 //
 //*************************************************************************************
 #include "Dryftor.h"
-
+#include "daisysp.h"
+#include "daisy_pod.h"
 //--------------------------------------------------------------------------
 using namespace daisysp;
 using namespace daisy;
@@ -77,10 +78,12 @@ float curveFunction(float input, float min, float max, Curve curve)
 
 //--------------------------------------------------------------------------
 
-static void AudioCallback(float *in, float *out, size_t size)
+static void AudioCallback(AudioHandle::InterleavingInputBuffer  in,
+                   AudioHandle::InterleavingOutputBuffer out,
+                   size_t                                size)
 {
     //Controls();
-
+    //pod.ProcessAllControls();
     podUI.Process();
 
     float y, yL, yR;
@@ -96,6 +99,7 @@ static void AudioCallback(float *in, float *out, size_t size)
         y = 0.0f;
 
         if(!stopSound)
+        //if(true)
         {
             for(int j = 0; j < OSC_NUMBER; j++)
             {
@@ -130,7 +134,7 @@ static void AudioCallback(float *in, float *out, size_t size)
         out[i] = yL;
 
         // right out
-        out[i + 1] = yR;
+        out[i+1] = yR;
     }
 }
 //----------------------------------------------------------------------------------------
@@ -310,6 +314,7 @@ void synthInit()
     delayON  = true;
     phaserON = true;
     chorusON = true;
+    stopSound = false;
     //fx_state  = DELAYonly;
     mainFreq = 440.0f;
 }
@@ -319,12 +324,12 @@ int main(void)
 {
     //Init everything in Daisy Pod
     pod.Init();
-
-    podUI.Init();
-
-    synthInit();
+    podUI.Init();  
 
     // start callback
+    pod.SetAudioBlockSize(48); // number of samples handled per callback
+	pod.SetAudioSampleRate(SaiHandle::Config::SampleRate::SAI_48KHZ);
+    synthInit();
     pod.StartAdc();
     pod.StartAudio(AudioCallback);
 

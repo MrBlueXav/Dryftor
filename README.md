@@ -11,6 +11,8 @@ Pod controls assignments depend of the mode you choose in rotating the encoder.
 
 Knobs positions are stored to prevent brutal value jumps when changing mode.
 
+Six modes are present but not fully implemented.
+
 In mode "white" (leds are white):
 
 * Switch1 toggles manual and automatic modes.
@@ -50,6 +52,10 @@ In mode "green" :
 * Knob1 :
 
 * Knob2 :
+
+...
+
+
 
 
 
